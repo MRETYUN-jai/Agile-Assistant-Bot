@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agile Assistant Bot — Your Complete Agile Toolkit</title>
+  <meta name="description" content="Interactive agile tools: Sprint Planner, Standup Timer, Retro Generator, Planning Poker, Velocity Calculator, and Burndown Charts." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- ───── NAV ───── -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">AgileBot</span>
+      </a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-menu" class="nav-menu">
+        <li><a href="#methodologies">Methodologies</a></li>
+        <li><a href="#sprint-planner">Sprint Planner</a></li>
+        <li><a href="#standup-timer">Standup</a></li>
+        <li><a href="#retro-generator">Retro</a></li>
+        <li><a href="#planning-poker">Poker</a></li>
+        <li><a href="#velocity-calc">Velocity</a></li>
+        <li><a href="#burndown-chart">Burndown</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ───── HERO ───── -->
+  <section id="hero" class="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-content">
+      <span class="hero-badge">🚀 Your Agile Companion</span>
+      <h1 class="hero-title">
+        Master <span class="gradient-text">Agile</span> with<br/>Interactive Tools
+      </h1>
+      <p class="hero-subtitle">
+        Sprint planning, standup facilitation, retrospectives, estimation, velocity tracking and burndown charts — all in one place.
+      </p>
+      <div class="hero-actions">
+        <a href="#methodologies" class="btn btn-primary">Explore Tools</a>
+        <a href="#sprint-planner" class="btn btn-secondary">Start Planning</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-number">7</span><span class="stat-label">Tools</span></div>
+        <div class="stat"><span class="stat-number">5</span><span class="stat-label">Frameworks</span></div>
+        <div class="stat"><span class="stat-number">∞</span><span class="stat-label">Sprints</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── METHODOLOGIES ───── -->
+  <section id="methodologies" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">📚 Knowledge Base</span>
+        <h2 class="section-title">Agile Methodologies</h2>
+        <p class="section-desc">Click any card to explore the framework in depth.</p>
+      </div>
+      <div id="method-grid" class="method-grid"></div>
+    </div>
+  </section>
+
+  <!-- ───── SPRINT PLANNER ───── -->
+  <section id="sprint-planner" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">📋 Interactive Tool</span>
+        <h2 class="section-title">Sprint Planner</h2>
+        <p class="section-desc">Add user stories, assign story points, and plan your sprints.</p>
+      </div>
+      <div class="tool-card">
+        <div class="sprint-config">
+          <div class="input-group">
+            <label for="sprint-capacity">Sprint Capacity (pts)</label>
+            <input type="number" id="sprint-capacity" value="40" min="1" max="200" />
+          </div>
+          <div class="input-group">
+            <label for="sprint-duration">Duration (days)</label>
+            <input type="number" id="sprint-duration" value="14" min="1" max="30" />
+          </div>
+        </div>
+        <div class="story-form">
+          <input type="text" id="story-title" placeholder="Enter user story title..." class="story-input" />
+          <select id="story-points" class="story-select">
+            <option value="1">1 pt</option>
+            <option value="2">2 pts</option>
+            <option value="3" selected>3 pts</option>
+            <option value="5">5 pts</option>
+            <option value="8">8 pts</option>
+            <option value="13">13 pts</option>
+            <option value="21">21 pts</option>
+          </select>
+          <select id="story-priority" class="story-select">
+            <option value="high">🔴 High</option>
+            <option value="medium" selected>🟡 Medium</option>
+            <option value="low">🟢 Low</option>
+          </select>
+          <button id="add-story-btn" class="btn btn-primary">+ Add</button>
+        </div>
+        <div class="sprint-progress">
+          <div class="progress-info">
+            <span>Sprint Load</span>
+            <span id="sprint-load">0 / 40 pts</span>
+          </div>
+          <div class="progress-bar">
+            <div id="sprint-progress-fill" class="progress-fill"></div>
+          </div>
+        </div>
+        <div id="story-list" class="story-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── STANDUP TIMER ───── -->
+  <section id="standup-timer" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">⏱️ Facilitator</span>
+        <h2 class="section-title">Daily Standup Timer</h2>
+        <p class="section-desc">Keep standups focused. Set time per person and go!</p>
+      </div>
+      <div class="tool-card">
+        <div class="standup-config">
+          <div class="input-group">
+            <label for="person-name">Team Member</label>
+            <input type="text" id="person-name" placeholder="Name..." />
+          </div>
+          <div class="input-group">
+            <label for="time-per-person">Seconds per person</label>
+            <input type="number" id="time-per-person" value="90" min="15" max="300" />
+          </div>
+          <button id="add-person-btn" class="btn btn-primary">+ Add</button>
+        </div>
+        <div id="team-list" class="team-list"></div>
+        <div class="timer-display">
+          <div id="timer-circle" class="timer-circle">
+            <svg viewBox="0 0 200 200">
+              <defs>
+                <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#06d6a0" />
+                  <stop offset="50%" stop-color="#0ea5e9" />
+                  <stop offset="100%" stop-color="#38bdf8" />
+                </linearGradient>
+              </defs>
+              <circle class="timer-bg" cx="100" cy="100" r="90" />
+              <circle id="timer-progress" class="timer-fg" cx="100" cy="100" r="90" />
+            </svg>
+            <div class="timer-text">
+              <span id="timer-current-name" class="timer-name">—</span>
+              <span id="timer-countdown" class="timer-seconds">0:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="timer-controls">
+          <button id="start-standup-btn" class="btn btn-primary" disabled>▶ Start</button>
+          <button id="skip-person-btn" class="btn btn-secondary" disabled>⏭ Skip</button>
+          <button id="reset-standup-btn" class="btn btn-ghost">↺ Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── RETRO GENERATOR ───── -->
+  <section id="retro-generator" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">🔄 Retrospective</span>
+        <h2 class="section-title">Retro Format Generator</h2>
+        <p class="section-desc">Pick a random retrospective format to keep things fresh.</p>
+      </div>
+      <div class="tool-card retro-card">
+        <div id="retro-display" class="retro-display">
+          <div class="retro-format-name">Click Shuffle!</div>
+          <div class="retro-format-desc">Get a random retrospective format for your next session.</div>
+          <div class="retro-columns"></div>
+        </div>
+        <button id="shuffle-retro-btn" class="btn btn-primary btn-lg">🎲 Shuffle Format</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── PLANNING POKER ───── -->
+  <section id="planning-poker" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">🃏 Estimation</span>
+        <h2 class="section-title">Planning Poker</h2>
+        <p class="section-desc">Pick your estimate — then reveal all cards at once!</p>
+      </div>
+      <div class="tool-card">
+        <div class="poker-story">
+          <input type="text" id="poker-story-input" placeholder="Describe the story to estimate..." class="story-input" />
+        </div>
+        <div id="poker-cards" class="poker-cards"></div>
+        <div class="poker-players">
+          <div class="input-group inline-group">
+            <input type="text" id="poker-player-name" placeholder="Add player name..." />
+            <button id="add-poker-player" class="btn btn-primary">+ Add</button>
+          </div>
+          <div id="poker-player-list" class="poker-player-list"></div>
+        </div>
+        <div class="poker-actions">
+          <button id="reveal-cards-btn" class="btn btn-primary" disabled>👁 Reveal Cards</button>
+          <button id="reset-poker-btn" class="btn btn-ghost">↺ New Round</button>
+        </div>
+        <div id="poker-result" class="poker-result hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── VELOCITY CALCULATOR ───── -->
+  <section id="velocity-calc" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">📊 Metrics</span>
+        <h2 class="section-title">Velocity Calculator</h2>
+        <p class="section-desc">Track completed story points per sprint and forecast capacity.</p>
+      </div>
+      <div class="tool-card">
+        <div class="velocity-form">
+          <div class="input-group">
+            <label for="velocity-sprint-name">Sprint Name</label>
+            <input type="text" id="velocity-sprint-name" placeholder="Sprint 1" />
+          </div>
+          <div class="input-group">
+            <label for="velocity-points">Completed Points</label>
+            <input type="number" id="velocity-points" value="30" min="0" />
+          </div>
+          <button id="add-velocity-btn" class="btn btn-primary">+ Add Sprint</button>
+        </div>
+        <div id="velocity-data" class="velocity-data"></div>
+        <div id="velocity-summary" class="velocity-summary hidden">
+          <div class="summary-card">
+            <span class="summary-label">Average Velocity</span>
+            <span id="avg-velocity" class="summary-value">—</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Best Sprint</span>
+            <span id="best-sprint" class="summary-value">—</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Trend</span>
+            <span id="velocity-trend" class="summary-value">—</span>
+          </div>
+        </div>
+        <canvas id="velocity-chart" class="chart-canvas hidden"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── BURNDOWN CHART ───── -->
+  <section id="burndown-chart" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">📉 Visualization</span>
+        <h2 class="section-title">Burndown Chart</h2>
+        <p class="section-desc">Visualize ideal vs actual progress for your current sprint.</p>
+      </div>
+      <div class="tool-card">
+        <div class="burndown-config">
+          <div class="input-group">
+            <label for="bd-total-points">Total Story Points</label>
+            <input type="number" id="bd-total-points" value="40" min="1" />
+          </div>
+          <div class="input-group">
+            <label for="bd-sprint-days">Sprint Days</label>
+            <input type="number" id="bd-sprint-days" value="10" min="1" max="30" />
+          </div>
+          <button id="generate-bd-btn" class="btn btn-primary">Generate Chart</button>
+        </div>
+        <div id="burndown-inputs" class="burndown-inputs hidden"></div>
+        <button id="update-bd-btn" class="btn btn-secondary hidden">📈 Update Chart</button>
+        <canvas id="burndown-canvas" class="chart-canvas hidden"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── FOOTER ───── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">AgileBot</span>
+        </div>
+        <p class="footer-text">Your complete agile toolkit — plan, collaborate, and deliver.</p>
+        <div class="footer-links">
+          <a href="#hero">Home</a>
+          <a href="#methodologies">Methodologies</a>
+          <a href="#sprint-planner">Sprint Planner</a>
+          <a href="#standup-timer">Standup</a>
+          <a href="#retro-generator">Retro</a>
+          <a href="#planning-poker">Poker</a>
+          <a href="#velocity-calc">Velocity</a>
+          <a href="#burndown-chart">Burndown</a>
+        </div>
+        <p class="footer-copy">© 2026 AgileBot. Built with ❤️ for agile teams.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AUDIO for standup timer -->
+  <audio id="timer-beep" preload="auto">
+    <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=" type="audio/wav" />
+  </audio>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
