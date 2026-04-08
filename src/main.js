@@ -1,4 +1,4 @@
-import './style.css';
+import '../style.css';
 
 // ═══════════════════════════════════════════════════════
 // 0. NAV & SCROLL EFFECTS
